@@ -210,6 +210,13 @@ public class AbstractTank implements Tank {
     //
     protected Action getActionToNextQuadrant(int v, int h){
 
+        Tank scanTank=bf.scanQuadrantTank(v,h);
+
+        if(scanTank!=null){
+            System.out.println("tank fire  "+v+" "+h);
+            return Action.FIRE;
+        }
+
         BFObject bfObject= (BFObject) bf.scanQuadrant(v,h);
 
         if(bfObject instanceof Blank || bfObject instanceof Water || bfObject.isDestroyed()){
@@ -273,6 +280,7 @@ public class AbstractTank implements Tank {
             //System.out.println(bf.scanQuadrant(v-1,h)+" T");
             return getActionToNextQuadrant(v - 1, h);
         }
+
 
         return Action.NONE;
     }
