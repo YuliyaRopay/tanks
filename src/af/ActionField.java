@@ -116,17 +116,17 @@ public class ActionField extends JPanel {
 
 
         int i=0;
-        while (i<20) {
-/*
+        while (i<30) {
+
             if (!aggressor.isDestroyed() && !defender.isDestroyed()) {
                 processAction(aggressor.setUp(), aggressor);
             }
 
-            if (!aggressor.isDestroyed() && !defender.isDestroyed()) {
+            if (!tiger.isDestroyed() && !defender.isDestroyed()) {
                 processAction(tiger.setUp(), tiger);
             }
-*/
-            if (!aggressor.isDestroyed() && !defender.isDestroyed()) {
+
+            if ((!aggressor.isDestroyed() || !tiger.isDestroyed()) && !defender.isDestroyed()) {
                 processAction(defender.setUp(), defender);
             }
 
@@ -327,6 +327,11 @@ public class ActionField extends JPanel {
 
             if (!defender.isDestroyed() && checkInterception(defender, bullet)) {
                 defender.destroy();
+                return true;
+            }
+
+            if (!tiger.isDestroyed() && checkInterception(tiger, bullet)) {
+                tiger.destroy();
                 return true;
             }
         }

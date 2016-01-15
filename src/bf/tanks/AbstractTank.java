@@ -259,7 +259,6 @@ public class AbstractTank implements Tank {
         //System.out.println("AT: current x="+h+" y="+v);
 
 
-
         if (resultH > h && getActionToNextQuadrant(v, h + 1)!= Action.NONE){
             turn(Direction.RIGHT);
             //System.out.println(bf.scanQuadrant(v,h+1)+" R "+v+" "+(h+1));
@@ -285,6 +284,72 @@ public class AbstractTank implements Tank {
         return Action.NONE;
     }
 
+
+
+    ///////
+    protected Action getActionToTargetObject2(String bfTargetObject){
+
+        int resultH=0;
+        int resultV=0;
+
+        if(bfTargetObject.equalsIgnoreCase("BT7") || bfTargetObject.equalsIgnoreCase("T34")
+                || bfTargetObject.equalsIgnoreCase("Tiger")){
+            resultH=bf.getTankLocation(bfTargetObject)[1];
+            resultV=bf.getTankLocation(bfTargetObject)[0];
+        }
+        else {
+            resultH=bf.getBFObjectLocation(bfTargetObject)[1];
+            resultV=bf.getBFObjectLocation(bfTargetObject)[0];
+        }
+
+
+        int h=bf.getQuadrant(getX());
+        int v=bf.getQuadrant(getY());
+
+        // System.out.println("AT: Result target x="+resultH+" y="+resultV);
+        //System.out.println("AT: current x="+h+" y="+v);
+
+        if(resultH==h && resultV>v){
+            turn(Direction.BOTTOM);
+            return Action.FIRE;
+        }
+        else if(resultH==h && resultV<v){
+            turn(Direction.TOP);
+            return Action.FIRE;
+        }
+        else if(resultV==v && resultH<h){
+            turn(Direction.LEFT);
+            return Action.FIRE;
+        }
+        else if(resultV==v && resultH>h){
+            turn(Direction.RIGHT);
+            return Action.FIRE;
+        }
+
+        if (resultH > h && getActionToNextQuadrant(v, h + 1)!= Action.NONE){
+            turn(Direction.RIGHT);
+            //System.out.println(bf.scanQuadrant(v,h+1)+" R "+v+" "+(h+1));
+            return getActionToNextQuadrant(v, h + 1);
+        }
+        if (resultH < h && getActionToNextQuadrant(v, h - 1)!= Action.NONE){
+            turn(Direction.LEFT);
+            //System.out.println(bf.scanQuadrant(v,h-1)+" L");
+            return getActionToNextQuadrant(v, h - 1);
+        }
+        if (resultV > v && getActionToNextQuadrant(v + 1, h)!= Action.NONE) {
+            turn(Direction.BOTTOM);
+            //System.out.println(bf.scanQuadrant(v+1,h)+" B");
+            return getActionToNextQuadrant(v+1,h);
+        }
+        if (resultV < v && getActionToNextQuadrant(v - 1, h)!= Action.NONE) {
+            turn(Direction.TOP);
+            //System.out.println(bf.scanQuadrant(v-1,h)+" T");
+            return getActionToNextQuadrant(v - 1, h);
+        }
+
+
+        return Action.NONE;
+    }
 
 
 }

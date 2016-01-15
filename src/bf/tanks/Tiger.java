@@ -29,11 +29,14 @@ public class Tiger extends AbstractTank {
 
     @Override
     public void destroy() {
+
         if (armor > 0) {
             armor--;
         } else {
             super.destroy();
         }
+
+       // super.destroy();
     }
 
     private int step = 0;

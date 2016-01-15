@@ -45,7 +45,7 @@ public class BattleField implements Drawable {
 
     public BattleField() throws Exception {
 
-        String location = getAggressorLocation();
+        String location = getStartAggressorLocation();
         defender = new T34(this,getStartDefenderLocation()[1], getStartDefenderLocation()[0],Direction.LEFT);
         aggressor = new BT7(this,Integer.parseInt(location.split("_")[1]), Integer.parseInt(location.split("_")[0]), Direction.RIGHT);
         tiger=new Tiger(this);
@@ -205,9 +205,29 @@ public class BattleField implements Drawable {
         return new Integer[]{-1,-1};
     }
 
+    //
+    public Tank scanQuadrantTank(int v, int h){
+
+        Integer[] quadrant=new Integer[]{v,h};
+        //System.out.println("BF: tiger= "+getTankLocation("Tiger")[0]+" "+getTankLocation("Tiger")[1]);
+
+        if(getTankLocation("BT7")[0]==quadrant[0] && getTankLocation("BT7")[1]==quadrant[1]){
+            return aggressor;
+        }
+        else if(getTankLocation("T34")[0]==quadrant[0] && getTankLocation("T34")[1]==quadrant[1]){
+            return defender;
+        }
+        else if (getTankLocation("Tiger")[0]==quadrant[0] && getTankLocation("Tiger")[1]==quadrant[1]){
+            return tiger;
+        }
+        else{
+            return null;
+        }
+
+    }
 
     //
-    public String getAggressorLocation() {
+    public String getStartAggressorLocation() {
         String[] aggressorPosition=new String[]{"64_64",64*3+"_"+64*5,0+"_"+0};
         Random r=new Random();
         int i=r.nextInt(3);
