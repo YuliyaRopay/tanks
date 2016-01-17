@@ -79,7 +79,7 @@ public class T34 extends AbstractTank {
     private Action protectEagle(){
 
         if(!bf.getTiger().isDestroyed()){
-            return  getActionToTargetObject2("Tiger2");
+            return  getActionToTargetObject2("Tiger");
         }
         return getActionToTargetObject2("BT7");
     }
