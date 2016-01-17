@@ -11,7 +11,8 @@ public class Launcher {
         SplashScreen splash=SplashScreen.getSplashScreen();
         Thread.sleep(5000);
         splash.close();
-*/
+        */
+
         ActionField af = new ActionField();
         af.runTheGame();
     }
