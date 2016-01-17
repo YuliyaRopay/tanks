@@ -60,8 +60,9 @@ public abstract class SimpleBFObject implements BFObject {
 
     protected void setImage(String nameImg){
         try{
-            File file=(new File(nameImg));
-            image= ImageIO.read(file);
+            //File file=(new File(nameImg));
+            //image= ImageIO.read(file);
+            image= ImageIO.read(getClass().getResource(nameImg));
 
         }catch(IOException e){
             System.out.println("Error! The picture "+nameImg+" is not loaded"+" "+e.getMessage());

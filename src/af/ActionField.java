@@ -61,10 +61,10 @@ public class ActionField extends JPanel {
     private Image getImage(String nameImg){
         Image image=null;
         try{
-            File file=(new File(nameImg));
-            image= ImageIO.read(file);
+            image= ImageIO.read(getClass().getResource(nameImg));
         }catch(IOException e){
-            System.out.println("Error! The picture "+nameImg+" is not loaded"+" "+e.getMessage());
+            System.out.println("AF " +
+                    "AF: Error! The picture "+nameImg+" is not loaded"+" "+e.getMessage());
         }
         return image;
     }

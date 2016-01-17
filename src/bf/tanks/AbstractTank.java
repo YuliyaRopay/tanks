@@ -69,8 +69,9 @@ public class AbstractTank implements Tank {
     protected Image setImage(String nameImg){
         Image image=null;
         try{
-            File file=(new File(nameImg));
-            image= ImageIO.read(file);
+            //File file=(new File(nameImg));
+            //image= ImageIO.read(file);
+            image= ImageIO.read(getClass().getResource(nameImg));
 
         }catch(IOException e){
             System.out.println("Error! The picture "+nameImg+" is not loaded"+" "+e.getMessage());
