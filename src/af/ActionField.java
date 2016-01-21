@@ -116,6 +116,7 @@ public class ActionField extends JPanel {
 
 
         int i=0;
+
         while (i<30) {
 
             if (!aggressor.isDestroyed() && !defender.isDestroyed()) {
@@ -129,6 +130,7 @@ public class ActionField extends JPanel {
             if ((!aggressor.isDestroyed() || !tiger.isDestroyed()) && !defender.isDestroyed()) {
                 processAction(defender.setUp(), defender);
             }
+            System.out.println("");
 
         i++;
         }
