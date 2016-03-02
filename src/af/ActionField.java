@@ -24,9 +24,12 @@ public class ActionField extends JPanel {
     private Tank aggressor;
     private Tank tiger;
     private Bullet bullet;
+    private ActionHistory ah;
 
 
     public ActionField() throws Exception {
+        ah=new ActionHistory();
+
         battleField = new BattleField();
 
         defender=battleField.getDefender();
@@ -142,17 +145,7 @@ public class ActionField extends JPanel {
 
     private void processAction(Action a, Tank tank) throws Exception {
 
-        String tankName=tank.getClass().getSimpleName();
-        Date data=new Date();
-        SimpleDateFormat datFormat=new SimpleDateFormat("yy/MM/dd hh:mm:ss");
-
-        System.out.println(datFormat.format(data)+"#"+tankName+"#"+tank.getX()+"#"+tank.getY()+"#"+tank.getDirection()
-                +"#"+a.name()+"#");
-
-        ActionHistory ah=new ActionHistory();
-        ah.write(datFormat.format(data)+"#"+tankName+"#"+tank.getX()+"#"+tank.getY()+"#"+tank.getDirection()
-                +"#"+a.name()+"#");
-
+        ah.write(tank, a);
 
         if (a == Action.MOVE) {
             //processFire(tank);
