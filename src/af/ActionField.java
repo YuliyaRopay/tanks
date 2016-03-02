@@ -10,6 +10,9 @@ import java.awt.*;
 import java.awt.image.ImageObserver;
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class ActionField extends JPanel {
 
@@ -138,6 +141,19 @@ public class ActionField extends JPanel {
     }
 
     private void processAction(Action a, Tank tank) throws Exception {
+
+        String tankName=tank.getClass().getSimpleName();
+        Date data=new Date();
+        SimpleDateFormat datFormat=new SimpleDateFormat("yy/MM/dd hh:mm:ss");
+
+        System.out.println(datFormat.format(data)+"#"+tankName+"#"+tank.getX()+"#"+tank.getY()+"#"+tank.getDirection()
+                +"#"+a.name()+"#");
+
+        ActionHistory ah=new ActionHistory();
+        ah.write(datFormat.format(data)+"#"+tankName+"#"+tank.getX()+"#"+tank.getY()+"#"+tank.getDirection()
+                +"#"+a.name()+"#");
+
+
         if (a == Action.MOVE) {
             //processFire(tank);
             processMove(tank);
@@ -145,6 +161,7 @@ public class ActionField extends JPanel {
             //processTurn(tank);
             processFire(tank);
         }
+
     }
 
     private void processTurn(Tank tank) throws Exception {
